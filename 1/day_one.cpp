@@ -2,6 +2,8 @@
 #include <fstream>
 #include <string>
 #include <stdlib.h>
+#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -10,6 +12,9 @@ int main() {
     int highest_calories = 0;
     int elf = 0;
     int most_prepared_elf;
+    int sum = 0;
+
+    vector<int> elves;
     string number;
     ifstream input ("input.txt");
 
@@ -19,15 +24,22 @@ int main() {
             current_calories += stoi(number);
         } else {
             elf++;
-            if(current_calories > highest_calories) {
-                highest_calories = current_calories;
-                most_prepared_elf = elf;
-            }
+            elves.push_back(current_calories);
+            // if(current_calories > highest_calories) {
+            //     highest_calories = current_calories;
+            //     most_prepared_elf = elf;
+            // }
             // cout << "[+] Elf " << elf  << ": " << current_calories << " calories" << endl;
             current_calories = 0;
         }
     }
+    sort(elves.begin(), elves.end());
 
-    cout << "[+] Elf " << most_prepared_elf  << " has the most calories at: " << highest_calories << " calories" << endl;
+    // for(int i = 0; i < elves.size(); i++) {
+    //    cout << "[+] Elf " << i  << " has " << elves.at(i) << " calories" << endl;
+    // }
+    cout << "[+] Elf " << elves.size()-1 << " has the most calories at " << elves.at(elves.size()-1) << endl;
+    sum = elves.at(elves.size()-1) + elves.at(elves.size()-2) + elves.at(elves.size()-3); 
+    cout << "[+] Sum of the top 3 elves are: " << sum << endl;  
     return 0;
 }
